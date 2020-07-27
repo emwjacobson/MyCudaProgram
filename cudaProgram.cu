@@ -54,5 +54,7 @@ int main()
     // Freeing up the GPU memory
     cudaFree(arr_d);
 
+    printf("Success!");
+
     return 0;
 }
