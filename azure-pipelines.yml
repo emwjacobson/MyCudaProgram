@@ -1,0 +1,17 @@
+trigger:
+- AzurePipelines
+
+pool:
+  name: Jetson
+
+variables:
+  DOCKER_CLI_EXPERIMENTAL: enabled
+
+stages:
+  - stage: Test
+    jobs:
+    - job: Test
+      displayName: Builds and tests prgram
+      steps:
+      - script: make
+        displayName: 'Runs program'
