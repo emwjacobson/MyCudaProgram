@@ -44,7 +44,7 @@ int main()
     {
         register int expected = arr_h[i] + OFFSET;
         printf("%d / %d\n", res_h[i], expected);
-        if (res_h[i] == expected)
+        if (res_h[i] != expected)
         {
             printf("FAILURE at i=%d", i);
             return 1;
