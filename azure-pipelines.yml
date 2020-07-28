@@ -13,9 +13,7 @@ stages:
     - job: Test
       displayName: Builds and tests prgram
       steps:
-      - script: docker login -u emwjacobson -p $(DOCKER_HUB_TOKEN) 
-        displayName: 'Login to Docker'
       - script: docker pull emwjacobson/cudatester
         displayName: 'Pulls the latest version of cudatester'
-      - script: docker run -v `pwd`:/app/copy --rm emwjacobson/cudatester make
+      - script: docker run -v `pwd`:/app/copy --rm emwjacobson/cudatester:latest make
         displayName: 'Test our program against Gold program'
