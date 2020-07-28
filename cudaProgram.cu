@@ -47,7 +47,7 @@ int main()
         if (res_h[i] == expected)
         {
             printf("FAILURE at i=%d", i);
-            break;
+            return 1;
         }
     }
 
