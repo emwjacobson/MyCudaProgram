@@ -11,10 +11,6 @@ stages:
     - job: Test
       displayName: Builds and tests program
       steps:
-      # Pull the docker image. When a self-hosted agent is used,
-      # this should be cashed between runs to minimize excessive downloading and speeding up the build.
-      - script: docker pull emwjacobson/cudatester
-        displayName: 'Pulls the latest version of cudatester'
       # Run 'make' inside of the container 
-      - script: docker run --rm -v `pwd`:/app/copy emwjacobson/cudatester:latest make
+      - script: make
         displayName: 'Runs our program'
