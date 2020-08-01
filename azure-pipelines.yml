@@ -8,9 +8,38 @@ pool:
 stages:
   - stage: Test
     jobs:
-    - job: Test
+    - job: Test1
       displayName: Builds and tests program
       steps:
       # Run 'make' inside of the container 
       - script: make
         displayName: 'Runs our program'
+      - script: sleep 10
+    - job: Test2
+      displayName: Builds and tests program
+      steps:
+      # Run 'make' inside of the container 
+      - script: make
+        displayName: 'Runs our program'
+      - script: sleep 10
+    - job: Test3
+      displayName: Builds and tests program
+      steps:
+      # Run 'make' inside of the container 
+      - script: make
+        displayName: 'Runs our program'
+      - script: sleep 10
+    - job: Test4
+      displayName: Builds and tests program
+      steps:
+      # Run 'make' inside of the container 
+      - script: make
+        displayName: 'Runs our program'
+      - script: sleep 10
+    - job: Test5
+      displayName: Builds and tests program
+      steps:
+      # Run 'make' inside of the container 
+      - script: make
+        displayName: 'Runs our program'
+      - script: sleep 10
