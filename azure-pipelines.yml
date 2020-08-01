@@ -19,5 +19,5 @@ stages:
       steps:
       - checkout: self
         submodules: recursive
-      - script: make -j -C cuda-samples
+      - script: make -j -k -C cuda-samples
         displayName: 'Makes nvidias cuda-samples'
