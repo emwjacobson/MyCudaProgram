@@ -17,5 +17,7 @@ stages:
     - job:
       displayName: Compiles Nvidias cuda-samples
       steps:
+      - checkout: self
+        submodules: recursive
       - script: make -j -C cuda-samples
         displayName: 'Makes nvidias cuda-samples'
