@@ -1,5 +1,6 @@
 trigger:
 - master
+- suite
 
 pool:
   # This is the name of the agent pool to run the tests on
