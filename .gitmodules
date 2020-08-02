@@ -1,3 +1,6 @@
 [submodule "cuda-samples"]
 	path = cuda-samples
 	url = https://github.com/nvidia/cuda-samples
+[submodule "mixbench"]
+	path = mixbench
+	url = https://github.com/ekondis/mixbench
