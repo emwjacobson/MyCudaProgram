@@ -12,7 +12,7 @@ stages:
     - job:
       displayName: Runs my CUDA program
       steps:
-      - script: make
+      - script: make -j -k -C MySampleProgram
         displayName: 'Runs our program'
     - job:
       displayName: Compiles Nvidias cuda-samples

@@ -15,9 +15,9 @@ This repo is also an example program to be used with Azure Pipelines with a GPU 
 
  3. Run docker image, mounting current directory
 
-   ``docker run --rm -it -v `pwd`:/root emwjacobson/cudatester make``
+   ``docker run --rm -it -v `pwd`:/root emwjacobson/cudatester [command]``
    - `--rm` will auto-delete the container after exiting
    - `-it` will run it interactively
    - ``-v `pwd`:/root`` will mount the current directory to `/root` inside of the container.
-   - `make` is the command to run inside of the container. In this case it runs the `make` command to build and run this MyCudaProgram program.
+   - `[command]` is the _optional_ command to run inside of the container.
       - This can be changed depending on workflow, eg to run a python file you might replace `make` with `python3 main.py`.
