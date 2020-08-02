@@ -1,3 +1,6 @@
 [submodule "cuda-samples"]
 	path = cuda-samples
 	url = https://github.com/nvidia/cuda-samples
+[submodule "cuda_benchmark"]
+	path = cuda_benchmark
+	url = https://github.com/senior-zero/cuda_benchmark/

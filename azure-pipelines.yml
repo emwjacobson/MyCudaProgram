@@ -21,3 +21,12 @@ stages:
         submodules: recursive
       - script: make -i -j -k -C cuda-samples
         displayName: 'Makes nvidias cuda-samples'
+    - job:
+      displayName: Compiles Nvidias cuda_benchmark
+      steps:
+      - checkout: self
+        submodules: recursive
+      - script: cd cuda_benchmark && sed -i 's/3.13/3.10/' CMakeLists.txt
+      - script: cmake .
+      - script: make
+        displayName: Makes program
