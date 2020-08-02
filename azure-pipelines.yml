@@ -22,14 +22,10 @@ stages:
       - script: make -i -j -k -C cuda-samples
         displayName: 'Makes nvidias cuda-samples'
     - job:
-      displayName: Compiles Nvidias cuda_benchmark
+      displayName: Compiles cuda_benchmark
       steps:
       - checkout: self
         submodules: recursive
-      - script: pwd
-      - script: cd cuda_benchmark && sed -i 's/3.13/3.10/' CMakeLists.txt
-      - script: pwd
-      - script: ls -lah
-      - script: cmake .
+      - script: cmake cuda_benchmark
       - script: make
         displayName: Makes program
