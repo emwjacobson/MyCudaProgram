@@ -26,6 +26,6 @@ stages:
       steps:
       - checkout: self
         submodules: recursive
-      - script: cmake cuda_benchmark
+      - script: sed -i 's/3.13/3.10/' ./cuda_benchmark/CMakeLists.txt && cmake cuda_benchmark
       - script: make
         displayName: Makes program
