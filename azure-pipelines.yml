@@ -25,6 +25,7 @@ stages:
       displayName: Complies mixbench
       steps:
       - checkout: self
+        submodules: recursive
       - script: cmake ./mixbench/mixbench-cuda
       - script: make
       - script: ./mixbench-cuda-ro
