@@ -4,3 +4,6 @@
 [submodule "mixbench"]
 	path = mixbench
 	url = https://github.com/ekondis/mixbench
+[submodule "tensorflow"]
+	path = tensorflow
+	url = https://github.com/tensorflow/tensorflow

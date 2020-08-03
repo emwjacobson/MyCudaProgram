@@ -29,3 +29,14 @@ stages:
       - script: cmake ./mixbench/mixbench-cuda
       - script: make -j
       - script: ./mixbench-cuda-ro
+    - job:
+      displayName: Complie tensorflow lite
+      steps:
+      - checkout: self
+        submodules: recursive
+      - script: apt update && apt install -y unzip
+        displayName: 'Temporary until cudatester updates'
+      - script: python3 -m pip install --upgrade pip
+        displayName: 'Temporary until cudatester updates'
+      - script: ./tensorflow/tensorflow/lite/tools/make/download_dependencies.sh
+      - script: ./tensorflow/tensorflow/lite/tools/make/build_aarch64_lib.sh

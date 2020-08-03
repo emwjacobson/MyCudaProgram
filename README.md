@@ -1,5 +1,7 @@
 # MyCudaProgram
 
+__NOTE__: This repo currently is made to run inside of a container on the Nvidia Jetson AGX Xavier, which is __ARM__ based. Therefore a few of the packages are made for arm, like compiling tensorflow lite.  
+
 This is a sample program that was made to test [CUDATester](https://github.com/emwjacobson/CUDATester).
 
 This repo is also an example program to be used with Azure Pipelines with a GPU enabled self-hosted agent. The `azure-pipelines.yml` gives an example of running on a Self-hosted agent pool.
