@@ -9,11 +9,13 @@ pool:
 stages:
   - stage: Test
     jobs:
+    
     - job:
       displayName: Runs my CUDA program
       steps:
       - script: make -j -k -C MySampleProgram
         displayName: 'Runs our program'
+
     - job:
       displayName: Compiles Nvidias cuda-samples
       steps:
@@ -21,6 +23,7 @@ stages:
         submodules: recursive
       - script: make -i -j -k -C cuda-samples
         displayName: 'Makes nvidias cuda-samples'
+
     - job:
       displayName: Complies mixbench
       steps:
@@ -29,6 +32,7 @@ stages:
       - script: cmake ./mixbench/mixbench-cuda
       - script: make -j
       - script: ./mixbench-cuda-ro
+
     - job:
       displayName: Complie tensorflow lite
       steps:
