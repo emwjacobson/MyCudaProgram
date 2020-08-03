@@ -39,4 +39,5 @@ stages:
       - script: python3 -m pip install --upgrade pip
         displayName: 'Temporary until cudatester updates'
       - script: ./tensorflow/tensorflow/lite/tools/make/download_dependencies.sh
+      - script: sed -i 's/NO_JOB=4/NO_JOB=10/' ./tensorflow/tensorflow/lite/tools/make/build_aarch64_lib.sh
       - script: ./tensorflow/tensorflow/lite/tools/make/build_aarch64_lib.sh
