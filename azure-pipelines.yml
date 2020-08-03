@@ -27,5 +27,5 @@ stages:
       - checkout: self
         submodules: recursive
       - script: cmake ./mixbench/mixbench-cuda
-      - script: make
+      - script: make -j
       - script: ./mixbench-cuda-ro
