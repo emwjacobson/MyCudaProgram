@@ -18,9 +18,18 @@ This repo is also an example program to be used with Azure Pipelines with a GPU 
 3. Run docker image, mounting current directory
 
     ``docker run --rm -it -v `pwd`:/root emwjacobson/cudatester [command]``
-    
+
     - `--rm` will auto-delete the container after exiting
     - `-it` will run it interactively
     - ``-v `pwd`:/root`` will mount the current directory to `/root` inside of the container.
     - `[command]` is the _optional_ command to run inside of the container.
       - This can be changed depending on workflow, eg to run a python file you might replace `make` with `python3 main.py`.
+
+## Benchmarking
+
+2 agent containers were setup on an Nvidia Jetson AGX Xavier. Below are the times it took to compile all of the sources repos based on which power model was currently running on it.
+
+nvpmodel -m 1: 10 Watt, 2 cores - 39m31s
+nvpmodel -m 5: 20 Watt, 4 cores - 17m29s
+nvpmodel -m 3: 30 Watt, 8 cores - 12m52s
+nvpmodel -m 0: Max Perf, 8 cores - 4m18s
