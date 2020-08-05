@@ -10,10 +10,11 @@ stages:
   - stage: Pre
     jobs:
     - job:
-      displayName: Pre-stage
+      displayName: Prestage
       steps:
       - script: printenv
-      - scirpt: echo $TOKEN
+      - script: echo $TOKEN
+
   - stage: Test
     jobs:
     
