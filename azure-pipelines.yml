@@ -7,14 +7,6 @@ pool:
   name: Jetson
 
 stages:
-  - stage: Pre
-    jobs:
-    - job:
-      displayName: Prestage
-      steps:
-      - script: printenv
-      - script: echo $TOKEN
-
   - stage: Test
     jobs:
     
