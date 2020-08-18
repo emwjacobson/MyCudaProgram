@@ -15,7 +15,7 @@ stages:
       steps:
       - script: make -j -k -C MySampleProgram
         displayName: 'Runs our program'
-      - script: nvprof --log-file cudaProgram.log ./MySampleProgram/cudaProgram
-        displayName: 'Run Nvidia Profiler on program'
-      - publish: cudaProgram.log
-        artifact: 'Profiler Output'
+      - script: mkdir out && nvprof -o out/cudaProgram.nvvp --log-file out/cudaProgram.log ./MySampleProgram/cudaProgram
+        displayName: 'Creates logs of program'
+      - publish: ./out
+        artifact: 'Profiler Logs'
