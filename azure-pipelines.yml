@@ -15,9 +15,21 @@ stages:
       steps:
       - script: make -j -k -C MySampleProgram
         displayName: 'Runs our program'
-      - script: mkdir out && nvprof -o out/cudaProgram.nvvp --log-file out/cudaProgram.log ./MySampleProgram/cudaProgram
+      - script: mkdir out && nvprof -o out/profiler.nvvp --log-file out/log.txt ./MySampleProgram/cudaProgram
         displayName: 'Creates logs of program'
-      - script: ./check.sh ./MySampleProgram/cudaProgram > out/result.txt
+      - script: ./check.sh ./MySampleProgram/cudaProgram | tee out/result.txt
         displayName: 'Check which features are used'
       - publish: ./out
-        artifact: 'Profiler Logs'
+        artifact: 'Sample Logs'
+
+    - job:
+      displayName: Stream Test
+      steps:
+      - script: make -j -C UnifiedMemoryStreams
+        displayName: 'Makes UnifiedMemoryStreams'
+      - script: mkdir out && nvprof -o out/profiler.nvvp --log-file out/log.txt ./UnifiedMemoryStreams/UnifiedMemoryStreams
+        displayName: 'Creates logs of program'
+      - script: ./check.sh ./UnifiedMemoryStreams/UnifiedMemoryStreams | tee out/result.txt
+        displayName: 'Check which features are used'
+      - publish: ./out
+        artifact: 'UnifiedMemoryStreams Logs'
