@@ -17,5 +17,7 @@ stages:
         displayName: 'Runs our program'
       - script: mkdir out && nvprof -o out/cudaProgram.nvvp --log-file out/cudaProgram.log ./MySampleProgram/cudaProgram
         displayName: 'Creates logs of program'
+      - script: ./check.sh ./MySampleProgram/cudaProgram > out/result.txt
+        displayName: 'Check which features are used'
       - publish: ./out
         artifact: 'Profiler Logs'
