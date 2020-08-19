@@ -15,8 +15,10 @@ stages:
       steps:
       - script: make -j -k -C MySampleProgram
         displayName: 'Runs our program'
-      - script: mkdir out && nvprof -o out/profiler.nvvp --log-file out/log.txt ./MySampleProgram/cudaProgram
-        displayName: 'Creates logs of program'
+      - script: mkdir out && nvprof -o out/profiler.nvvp ./MySampleProgram/cudaProgram
+        displayName: 'Creates visual profiler log'
+      - script: mkdir out && nvprof --log-file out/log.txt ./MySampleProgram/cudaProgram
+        displayName: 'Creates output log'
       - script: ./check.sh ./MySampleProgram/cudaProgram | tee out/result.txt
         displayName: 'Check which features are used'
       - publish: ./out
@@ -27,8 +29,10 @@ stages:
       steps:
       - script: make -j -C UnifiedMemoryStreams
         displayName: 'Makes UnifiedMemoryStreams'
-      - script: mkdir out && nvprof -o out/profiler.nvvp --log-file out/log.txt ./UnifiedMemoryStreams/UnifiedMemoryStreams
-        displayName: 'Creates logs of program'
+      - script: mkdir out && nvprof -o out/profiler.nvvp ./UnifiedMemoryStreams/UnifiedMemoryStreams
+        displayName: 'Creates visual profiler log'
+      - script: mkdir out && nvprof --log-file out/log.txt ./UnifiedMemoryStreams/UnifiedMemoryStreams
+        displayName: 'Creates output log'
       - script: ./check.sh ./UnifiedMemoryStreams/UnifiedMemoryStreams | tee out/result.txt
         displayName: 'Check which features are used'
       - publish: ./out
