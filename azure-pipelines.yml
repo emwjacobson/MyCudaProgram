@@ -6,13 +6,20 @@ pool:
   # This is the name of the agent pool to run the tests on
   name: Jetson
 
+
+# Azure Pipelines can have multiple Stages. This example has 1 stage, with 2 jobs.
+# Jobs 
+
 stages:
+  # This is the single stage. Stages are run synchronously in order.
   - stage: Test
     jobs:
     
+    # These are the 2 jobs, jobs are run in parallel, so multiple jobs can be run at the same time
     - job:
       displayName: Runs my CUDA program
       steps:
+      # Jobs can have multiple steps, these are run synchronously in order
       - script: make -j -k -C MySampleProgram
         displayName: 'Runs our program'
       - script: mkdir out && nvprof -o out/profiler.nvvp ./MySampleProgram/cudaProgram
@@ -21,9 +28,11 @@ stages:
         displayName: 'Creates output log'
       - script: ./check.sh ./MySampleProgram/cudaProgram | tee out/result.txt
         displayName: 'Check which features are used'
+      # The final step is publish some logs they were produced in the above script steps
       - publish: ./out
         artifact: 'Sample Logs'
 
+    # This is the second job, very similar to the first, but on a different program
     - job:
       displayName: Stream Test
       steps:

@@ -1,10 +1,14 @@
 # MyCudaProgram
 
-__NOTE__: This repo currently is made to run inside of a container on the Nvidia Jetson AGX Xavier, which is __ARM__ based. Therefore a few of the packages are made for arm, like compiling tensorflow lite.  
-
 This is a sample program that was made to test [CUDATester](https://github.com/emwjacobson/CUDATester).
 
 This repo is also an example program to be used with Azure Pipelines with a GPU enabled self-hosted agent. The `azure-pipelines.yml` gives an example of running on a Self-hosted agent pool.
+
+This repo currently has 2 projects, a sample CUDA program (MySampleProgram), and a Unified Memory program by Nvidia (UnifiedMemoryStreams). These are both run as seperate jobs, and each job produces 3 output files:
+- A .nvvp file - A file to be used in Nvidia Visual Profiler tool to analyze kernel calls
+- 2 .txt files
+    - One is a log file straight from nvprof, useful to analyze cuda API calls in the program
+    - The other is the output from `check.sh` which checks to see if certain CUDA API calls are being made
 
 ## Usage
 1. Clone this repo
@@ -17,13 +21,14 @@ This repo is also an example program to be used with Azure Pipelines with a GPU 
 
 3. Run docker image, mounting current directory
 
-    ``docker run --rm -it -v `pwd`:/root emwjacobson/cudatester [command]``
+    ``docker run --rm -it -v $(pwd):/root emwjacobson/cudatester [command]``
 
     - `--rm` will auto-delete the container after exiting
     - `-it` will run it interactively
-    - ``-v `pwd`:/root`` will mount the current directory to `/root` inside of the container.
+    - ``-v $(pwd):/root`` will mount the current directory to `/root` inside of the container.
     - `[command]` is the _optional_ command to run inside of the container.
-      - This can be changed depending on workflow, eg to run a python file you might replace `make` with `python3 main.py`.
+      - This can be changed depending on workflow, eg to run a python file you might want to use `python3 main.py`.
+      - If no command is specified, it will drop you into a bash shell
 
 ## Benchmarking
 
