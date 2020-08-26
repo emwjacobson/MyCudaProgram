@@ -1,6 +1,6 @@
 trigger:
 - master
-- suite
+- profiler
 
 pool:
   # This is the name of the agent pool to run the tests on
@@ -15,33 +15,25 @@ stages:
       steps:
       - script: make -j -k -C MySampleProgram
         displayName: 'Runs our program'
-      - script: nvprof --log-file cudaProgram.log ./MySampleProgram/cudaProgram
-        displayName: 'Run Nvidia Profiler on program'
-      - publish: cudaProgram.log
-        artifact: 'Profiler Output'
+      - script: mkdir out && nvprof -o out/profiler.nvvp ./MySampleProgram/cudaProgram
+        displayName: 'Creates visual profiler log'
+      - script: nvprof --log-file out/log.txt ./MySampleProgram/cudaProgram
+        displayName: 'Creates output log'
+      - script: ./check.sh ./MySampleProgram/cudaProgram | tee out/result.txt
+        displayName: 'Check which features are used'
+      - publish: ./out
+        artifact: 'Sample Logs'
 
     - job:
-      displayName: Compiles Nvidias cuda-samples
+      displayName: Stream Test
       steps:
-      - checkout: self
-        submodules: recursive
-      - script: make -i -j -k -C cuda-samples
-        displayName: 'Makes nvidias cuda-samples'
-
-    - job:
-      displayName: Complies mixbench
-      steps:
-      - checkout: self
-        submodules: recursive
-      - script: cmake ./mixbench/mixbench-cuda
-      - script: make -j
-      - script: ./mixbench-cuda-ro
-
-    - job:
-      displayName: Complie tensorflow lite
-      steps:
-      - checkout: self
-        submodules: recursive
-      - script: ./tensorflow/tensorflow/lite/tools/make/download_dependencies.sh
-      - script: sed -i 's/NO_JOB=4/NO_JOB=10/' ./tensorflow/tensorflow/lite/tools/make/build_aarch64_lib.sh
-      - script: ./tensorflow/tensorflow/lite/tools/make/build_aarch64_lib.sh
+      - script: make -j -C UnifiedMemoryStreams
+        displayName: 'Makes UnifiedMemoryStreams'
+      - script: mkdir out && nvprof -o out/profiler.nvvp ./UnifiedMemoryStreams/UnifiedMemoryStreams
+        displayName: 'Creates visual profiler log'
+      - script: nvprof --log-file out/log.txt ./UnifiedMemoryStreams/UnifiedMemoryStreams
+        displayName: 'Creates output log'
+      - script: ./check.sh ./UnifiedMemoryStreams/UnifiedMemoryStreams | tee out/result.txt
+        displayName: 'Check which features are used'
+      - publish: ./out
+        artifact: 'UnifiedMemoryStreams Logs'
